@@ -30,6 +30,7 @@ Rajesh: 250 INR
 */
 #include<stdio.h>
 #include<string.h>
+#include<ctype.h>
 int main(){
   char parent[20];
   scanf("%[^\n]",parent);
@@ -59,6 +60,13 @@ int main(){
   const char delimiter[] = ",";
   char *token = strtok(child,delimiter);
   while(token!=NULL){
+    while(isspace((unsigned char)*token)){//leading space
+      token++;
+    }
+    int len = strlen(token);
+    while(len>0 && isspace((unsigned char)token[len-1])){//trailing space
+      token[--len]='\0';
+    }
     printf("%s: %d INR\n",token,child_income);
     token = strtok(NULL,delimiter);
   }
